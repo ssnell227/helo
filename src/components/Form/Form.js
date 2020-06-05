@@ -22,8 +22,8 @@ class Form extends Component {
 
     createPost () {
         const {title, img, content} = this.state
-        axios.post(`/api/posts/${this.props.userid}`, {title, img, content})
-        .then(() => this.props.history.push('/'))
+        axios.post(`/api/post/${this.props.userId}`, {title, img, content})
+        .then((res) => this.props.history.push('/dashboard'))
     }
 
     render() {

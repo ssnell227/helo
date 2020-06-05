@@ -4,9 +4,9 @@ module.exports = {
         const { title, img, content } = req.body
         const db = req.app.get('db')
 
-        console.log('firing')
+        console.log(req.params)
 
-        const createdPost = await db.create_post([title, img, content, userid])
+        const createdPost = await db.create_post([title, img, content, +userid])
             .catch(err => console.log(err))
         if (createdPost) {
             res.sendStatus(200)
