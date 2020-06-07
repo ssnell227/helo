@@ -29,7 +29,7 @@ class Dashboard extends Component {
     }
 
     searchPosts() {
-        axios.get(`/api/post/${this.props.userId}?query=${this.state.query}&userPosts=${this.state.userPosts}`)
+        axios.get(`/api/post/?query=${this.state.query}&userPosts=${this.state.userPosts}`)
             .then(res => {
                 this.setState({
                     posts: res.data,
@@ -39,7 +39,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        axios.get(`/api/post/${this.props.userId}?query=${this.state.query}&userPosts=${this.state.userPosts}`)
+        axios.get(`/api/post/?query=${this.state.query}&userPosts=${this.state.userPosts}`)
             .then(res => {
                 this.setState({
                     posts: res.data
@@ -72,9 +72,6 @@ class Dashboard extends Component {
     }
 }
 
-function mapStateToProps(reduxState) {
-    const { userId } = reduxState
-    return { userId }
-}
 
-export default connect(mapStateToProps)(Dashboard)
+
+export default Dashboard

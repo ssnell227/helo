@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
 import axios from 'axios'
 
 class Form extends Component {
@@ -20,31 +19,29 @@ class Form extends Component {
         })
     }
 
-    createPost () {
-        const {title, img, content} = this.state
-        axios.post(`/api/post/${this.props.userId}`, {title, img, content})
-        .then((res) => this.props.history.push('/dashboard'))
+    createPost(e) {
+        e.preventDefault()
+        const { title, img, content } = this.state
+        axios.post(`/api/post`, { title, img, content })
+            .then(() => this.props.history.push('/dashboard'))
     }
 
     render() {
         return (
             <div>
-                <h1>New Post</h1>
-                <label>Title:</label><input data-name='title' value={this.state.title} onChange={this.updateInput} />
-                <img />
-                <label>Image URL:</label><input data-name='img' value={this.state.img} onChange={this.updateInput} />
-                <label>Content</label><input data-name='content' value={this.state.content} onChange={this.updateInput} />
-                <button onClick={this.createPost}>Post</button>
+                <form>
+                    <h1>New Post</h1>
+                    <label>Title:</label><input data-name='title' value={this.state.title} onChange={this.updateInput} />
+                    <img src={this.state.img} alt='content' />
+                    <label>Image URL:</label><input data-name='img' value={this.state.img} onChange={this.updateInput} />
+                    <label>Content</label><input data-name='content' value={this.state.content} onChange={this.updateInput} />
+                    <input type='submit' onClick={this.createPost} value='Post'/>
+                </form>
             </div>
         )
     }
 }
 
-function mapStateToProps (reduxState) {
-    const { userId } = reduxState
-    return {
-        userId
-    }
-}
 
-export default connect(mapStateToProps)(Form)
+
+export default Form

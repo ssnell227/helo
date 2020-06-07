@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './components/Nav/Nav'
-import routes from './routes'
+import Routes from './routes'
+import {withRouter} from 'react-router-dom'
 
 import './App.css';
 
@@ -12,11 +13,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav/>
-        {routes}
+       {this.props.location.pathname !== '/' && <Nav/>}
+        {Routes}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

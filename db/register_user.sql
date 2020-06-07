@@ -1,8 +1,10 @@
 insert into users (
 username,
-password
+password,
+profile_pic
 ) values (
 $1,
-$2
+$2,
+$3
 )
 returning *;

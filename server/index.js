@@ -34,10 +34,14 @@ app.post('/api/auth/login', authCtrl.login)
 
 app.delete('/api/auth/logout', authCtrl.logout)
 
+app.get('/api/auth/getSessionUser', authCtrl.getSessionUser)
+
 //post endpoints
 
-app.post('/api/post/:userid', postCtrl.createPost)
+app.post('/api/post', postCtrl.createPost)
 
-app.get('/api/post/:userid', postCtrl.getPostsByQuery)
+app.get('/api/post', postCtrl.getPostsByQuery)
 
 app.get('/api/post/byid/:postid', postCtrl.getPostById)
+
+app.post('/api/post/:postid', postCtrl.deletePost)

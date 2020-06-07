@@ -4,6 +4,7 @@ module.exports = {
     register: async (req, res) => {
         const {username, password} = req.body
         const db = req.app.get('db')
+        const profile_pic = 'https://p7.hiclipart.com/preview/442/477/305/computer-icons-user-profile-avatar-profile.jpg'
 
         const userResponse = await db.check_user(username)
         
@@ -12,7 +13,7 @@ module.exports = {
         }
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
-        const newUser = await db.register_user(username, hash)
+        const newUser = await db.register_user(username, hash, profile_pic)
 
         req.session.user = newUser[0]
         delete req.session.user.password
@@ -41,5 +42,12 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy()
         res.sendStatus(200)
+    },
+    getSessionUser: async (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+        const userInfo = await db.get_session_user(user_id)
+        .catch(err => console.log(err))
+        res.status(200).send(userInfo)
     }
 }
