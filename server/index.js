@@ -44,4 +44,4 @@ app.get('/api/post', postCtrl.getPostsByQuery)
 
 app.get('/api/post/byid/:postid', postCtrl.getPostById)
 
-app.post('/api/post/:postid', postCtrl.deletePost)
+app.delete('/api/post/:postid', postCtrl.deletePost)

@@ -4,8 +4,6 @@ module.exports = {
         const { title, img, content } = req.body
         const db = req.app.get('db')
 
-        console.log(req.session)
-
         const createdPost = await db.create_post([title, img, content, +user_id])
             .catch(err => console.log(err))
         if (createdPost) {
@@ -44,7 +42,6 @@ module.exports = {
     deletePost: async (req, res) => {
         const { postid } = req.params
         const db = req.app.get('db')
-        console.log(postid)
         await db.delete_post(+postid)
         .catch(err => console.log(err))
         res.sendStatus(200)

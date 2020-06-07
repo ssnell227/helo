@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
@@ -14,6 +13,7 @@ class Dashboard extends Component {
         this.updateInput = this.updateInput.bind(this)
         this.updateCheckbox = this.updateCheckbox.bind(this)
         this.searchPosts = this.searchPosts.bind(this)
+        this.reset = this.reset.bind(this)
     }
 
     updateInput(e) {
@@ -36,6 +36,13 @@ class Dashboard extends Component {
                     query: ''
                 })
             })
+    }
+
+    reset () {
+        this.setState({
+            query: '',
+            userPosts: true
+        })
     }
 
     componentDidMount() {
@@ -64,7 +71,7 @@ class Dashboard extends Component {
             <div>
                 <input onChange={this.updateInput} placeholder='Search by title' data-name='query' value={this.state.query} />
                 <button onClick={this.searchPosts}>Search</button>
-                <button>Reset</button>
+                <button onClick={this.reset}>Reset</button>
                 <label>My Posts</label><input data-name='userPosts' checked={this.state.userPosts} onChange={this.updateCheckbox} type='checkbox' />
                 {postsMap}
             </div>
