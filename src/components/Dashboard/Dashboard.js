@@ -39,7 +39,7 @@ class Dashboard extends Component {
             })
     }
 
-    reset () {
+    reset() {
         this.setState({
             query: '',
             userPosts: true
@@ -59,22 +59,30 @@ class Dashboard extends Component {
         const postsMap = this.state.posts.map(post => {
             return (
                 //values for these might change depending on the names of properties of the post objects
-                <Link key={post.post_id} to={`/post/${post.post_id}`}>
-                    <div >
-                        <h1>{post.title}</h1>
-                        <h3>{post.username}</h3>
-                        <img src={post.img} alt='profile' />
+                <Link className='white-box post' key={post.post_id} to={`/post/${post.post_id}`}>
+                    <h2>{post.title}</h2>
+                    <div className='poster-info'>
+                        <h4>by: {post.username}</h4>
+                        <img src={post.profile_pic} alt='profile' />
                     </div>
                 </Link>
             )
         })
         return (
-            <div>
-                <input onChange={this.updateInput} placeholder='Search by title' data-name='query' value={this.state.query} />
-                <button onClick={this.searchPosts}>Search</button>
-                <button onClick={this.reset}>Reset</button>
-                <label>My Posts</label><input data-name='userPosts' checked={this.state.userPosts} onChange={this.updateCheckbox} type='checkbox' />
-                {postsMap}
+            <div className='dashboard'>
+                <div className='search white-box'>
+                    <div>
+                        <input onChange={this.updateInput} placeholder='Search by title' data-name='query' value={this.state.query} />
+                        <button className='search-button pink-button button' onClick={this.searchPosts}>Search</button>
+                        <button className='dark-button search-button button' onClick={this.reset}>Reset</button>
+                    </div>
+                    <label>My posts
+                        <input data-name='userPosts' checked={this.state.userPosts} onChange={this.updateCheckbox} type='checkbox' />
+                    </label>
+                </div>
+                <div className='white-box post-container'>
+                    {postsMap}
+                </div>
             </div>
         )
     }

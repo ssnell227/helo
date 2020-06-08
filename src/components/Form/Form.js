@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './Form.css'
 
 class Form extends Component {
     constructor(props) {
@@ -28,14 +29,16 @@ class Form extends Component {
 
     render() {
         return (
-            <div>
-                <form>
+            <div className='form-container'>
+                <form className='form white-box'>
                     <h1>New Post</h1>
-                    <label>Title:</label><input data-name='title' value={this.state.title} onChange={this.updateInput} />
-                    <img src={this.state.img} alt='content' />
-                    <label>Image URL:</label><input data-name='img' value={this.state.img} onChange={this.updateInput} />
-                    <label>Content</label><input data-name='content' value={this.state.content} onChange={this.updateInput} />
-                    <input type='submit' onClick={this.createPost} value='Post'/>
+                    <div className='inputs'>
+                        <label>Title:</label><input data-name='title' value={this.state.title} onChange={this.updateInput} />
+                        <img src={this.state.img} alt='content' />
+                        <label>Image URL:</label><input data-name='img' value={this.state.img} onChange={this.updateInput} />
+                        <label>Content:</label><textarea rows='6' data-name='content' value={this.state.content} onChange={this.updateInput} />
+                    </div>
+                    <input className='dark-button post-button' type='submit' onClick={this.createPost} value='Post' />
                 </form>
             </div>
         )

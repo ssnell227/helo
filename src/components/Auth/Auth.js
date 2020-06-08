@@ -73,8 +73,8 @@ class Auth extends Component {
                             <input value={this.state.password} onChange={this.updateInput} type='password' data-name='password' />
                         </label>
                         <div className='auth-button-container'>
-                            <input className='dark-button button' onClick={this.login} type='submit' value='Login' />
-                            <button className='dark-button button' onClick={this.createUser}>Register</button>
+                            <input className='dark-button button auth-button' onClick={this.login} type='submit' value='Login' />
+                            <button className='dark-button button auth-button' onClick={this.createUser}>Register</button>
                         </div>
                     </form>
                 </main>
