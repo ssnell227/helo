@@ -1,4 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 .App {
+  box-sizing: border-box;
+
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+
   text-align: center;
+  font-family: 'Open Sans';
+  position: relative;
 }
 
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+}
+
+.dark-button {
+  background: radial-gradient(circle at 50% -46%,#737373,#403d39);
+  padding: 10px 20px;
+}

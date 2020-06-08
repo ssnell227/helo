@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {connect} from 'react-redux'
-import {setUser} from '../../ducks/reducer'
+import { connect } from 'react-redux'
+import { setUser } from '../../ducks/reducer'
+import './Auth.css'
 
 class Auth extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Auth extends Component {
     }
 
     createUser() {
-        const {username, password} = this.state
+        const { username, password } = this.state
 
         if (!username) {
             return alert('Please enter a username')
@@ -35,41 +36,52 @@ class Auth extends Component {
             return alert('Username must be shorter than 20 characters')
         }
 
-        axios.post('/api/auth/register', {username, password})
-        .then(() => {
-            this.props.history.push('/dashboard')
-        })
-        .catch(err => {console.log(err)
-             alert('Username taken, please choose another')
-        })
+        axios.post('/api/auth/register', { username, password })
+            .then(() => {
+                this.props.history.push('/dashboard')
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Username taken, please choose another')
+            })
     }
 
-    login (e) {
+    login(e) {
         e.preventDefault()
-        const {username, password} = this.state
-        axios.post('/api/auth/login', {username, password})
-        .then(res => {
-            const {profile_pic, user_id, username} = res.data
-            this.props.setUser(user_id, username, profile_pic)
-            this.props.history.push('/dashboard')
-        })
+        const { username, password } = this.state
+        axios.post('/api/auth/login', { username, password })
+            .then(res => {
+                const { profile_pic, user_id, username } = res.data
+                this.props.setUser(user_id, username, profile_pic)
+                this.props.history.push('/dashboard')
+            })
     }
 
     render() {
-        return (<div>
-            <main>
-                <h1>Helo</h1>
-                <form>
-                    <label>Username</label><input value={this.state.username} onChange={this.updateInput} data-name='username' />
-                    <label>Password</label><input value={this.state.password} onChange={this.updateInput} type='password' data-name='password' />
-                    <input onClick={this.login} type='submit' value='Login' />
-                    <button onClick={this.createUser}>Register</button>
-                </form>
-            </main>
-        </div>
+        return (
+            <div className='auth'>
+                <main className='auth-container'>
+                    <div id='logo-container'>
+                        <img id='auth-logo' src='./helo-logo.png' alt='helo-logo' />
+                        <h1>Helo</h1>
+                    </div>
+                    <form className='auth-form'>
+                        <label>Username:
+                            <input value={this.state.username} onChange={this.updateInput} data-name='username' />
+                        </label>
+                        <label>Password:
+                            <input value={this.state.password} onChange={this.updateInput} type='password' data-name='password' />
+                        </label>
+                        <div className='auth-button-container'>
+                            <input className='dark-button button' onClick={this.login} type='submit' value='Login' />
+                            <button className='dark-button button' onClick={this.createUser}>Register</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
         )
     }
 
 }
 
-export default connect(null, {setUser})(Auth)
+export default connect(null, { setUser })(Auth)
